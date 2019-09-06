@@ -52,6 +52,14 @@ class ViewController: UIViewController {
         if sender.isSelected == true {
             currency = .cad
             toCurrencyLabel.text = "Currency (CAD)"
+            func getSymbol(forCurrencyCode code: String) -> String? {
+                let locale = NSLocale(localeIdentifier: code)
+                if locale.displayName(forKey: .currencySymbol, value: code) == code {
+                    let newlocale = NSLocale(localeIdentifier: code.dropLast() + "_en")
+                    return newlocale.displayName(forKey: .currencySymbol, value: code)
+                }
+                return locale.displayName(forKey: .currencySymbol, value: code)
+            }
         }
     }
     
@@ -60,6 +68,14 @@ class ViewController: UIViewController {
         if sender.isSelected == true {
             currency = .mxn
             toCurrencyLabel.text = "Currency (MXN)"
+            func getSymbol(forCurrencyCode code: String) -> String? {
+                let locale = NSLocale(localeIdentifier: code)
+                if locale.displayName(forKey: .currencySymbol, value: code) == code {
+                    let newlocale = NSLocale(localeIdentifier: code.dropLast() + "_en")
+                    return newlocale.displayName(forKey: .currencySymbol, value: code)
+                }
+                return locale.displayName(forKey: .currencySymbol, value: code)
+            }
         }
     }
     
@@ -72,13 +88,12 @@ class ViewController: UIViewController {
     
     func convertToCanadaDollar (_ dollars: Double) -> String {
         let canadaDollars = dollars * 1.33
-        let modifiedCanadaDollar = String(format: "%.2f", canadaDollars)
+        let modifiedCanadaDollar = String(format: "$ %.2f", canadaDollars)
         return modifiedCanadaDollar
     }
     func convertToPesoDollar (_ pesos: Double) -> String {
         let pesoDollars = pesos * 19.74
-        let modifiedPesoDollar = String(format: "%.2f", pesoDollars)
+        let modifiedPesoDollar = String(format: "$ %.2f", pesoDollars)
         return modifiedPesoDollar
     }
 }
-
